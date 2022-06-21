@@ -2,6 +2,7 @@ interface Veiculo {
     nome: string;
     placa: string;
     entrada: Date | string;
+    usuario : string;
 }
 
 (function() {
@@ -27,10 +28,18 @@ interface Veiculo {
         function adicionar(veiculo: Veiculo, salva?: boolean){
             const row = document.createElement("tr");
 
+                                    
+
             row.innerHTML = `
                 <td>${veiculo.nome}</td>
                 <td>${veiculo.placa}</td>
-                <td>${veiculo.entrada}</td>
+                <td data-time="${veiculo.entrada}">
+                    ${veiculo.entrada.toLocaleString("pt-BR",{
+                        hour: "numeric",
+                        minute: "numeric",
+                    })}
+                </td>
+                <td>${veiculo.usuario}</td>
                 <td>
                     <button class="delete" 
                             data-placa="${veiculo.placa}">x
@@ -76,13 +85,17 @@ interface Veiculo {
     $("#cadastrar")?.addEventListener("click", () => {
         const nome = $("#nome")?.value;
         const placa = $("#placa")?.value;
+        const check = $("#logista")?.checked;
+        let usuario = "Cliente";
+        
 
-
+        if (check) usuario = "Logísta";
+        
         if (!nome || !placa) {
             alert("Os campos nome e placa são obrigatórios");
             return;
         }
 
-        patio().adicionar({ nome, placa, entrada: new Date().toISOString() }, true);
+        patio().adicionar({ nome, placa, entrada: new Date().toISOString(), usuario }, true);
     });
 })();

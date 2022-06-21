@@ -19,7 +19,13 @@
             row.innerHTML = `
                 <td>${veiculo.nome}</td>
                 <td>${veiculo.placa}</td>
-                <td>${veiculo.entrada}</td>
+                <td data-time="${veiculo.entrada}">
+                    ${veiculo.entrada.toLocaleString("pt-BR", {
+                hour: "numeric",
+                minute: "numeric",
+            })}
+                </td>
+                <td>${veiculo.usuario}</td>
                 <td>
                     <button class="delete" 
                             data-placa="${veiculo.placa}">x
@@ -52,13 +58,17 @@
     }
     patio().render();
     (_a = $("#cadastrar")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-        var _a, _b;
+        var _a, _b, _c;
         const nome = (_a = $("#nome")) === null || _a === void 0 ? void 0 : _a.value;
         const placa = (_b = $("#placa")) === null || _b === void 0 ? void 0 : _b.value;
+        const check = (_c = $("#logista")) === null || _c === void 0 ? void 0 : _c.checked;
+        let usuario = "Cliente";
+        if (check)
+            usuario = "Logísta";
         if (!nome || !placa) {
             alert("Os campos nome e placa são obrigatórios");
             return;
         }
-        patio().adicionar({ nome, placa, entrada: new Date().toISOString() }, true);
+        patio().adicionar({ nome, placa, entrada: new Date().toISOString(), usuario }, true);
     });
 })();
