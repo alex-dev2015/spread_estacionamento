@@ -1,10 +1,17 @@
 (function () {
-    var _a;
     const $ = (query) => document.querySelector(query);
     function calcTempo(mil) {
         const min = Math.floor(mil / 60000);
         const sec = Math.floor((mil % 60000) / 1000);
         return `${min}m e ${sec}s`;
+    }
+    function tabValue(tempo) {
+        if (tempo <= 15) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
     function clearInput() {
         $("#nome").value = "";
@@ -19,7 +26,6 @@
             localStorage.setItem("patio", JSON.stringify(veiculos));
         }
         function adicionar(veiculo, salva) {
-            var _a, _b;
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${veiculo.nome}</td>
@@ -37,18 +43,32 @@
                     </button>
                 </td>
             `;
-            (_a = row.querySelector(".button-delete")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () {
+            row.querySelector(".button-delete")?.addEventListener("click", function () {
                 remover(this.dataset.placa);
             });
-            (_b = $("#patio")) === null || _b === void 0 ? void 0 : _b.appendChild(row);
+            $("#patio")?.appendChild(row);
             if (salva)
                 salvar([...ler(), veiculo]);
         }
         function remover(placa) {
             const { entrada, nome } = ler().find((veiculo) => veiculo.placa === placa);
             const tempo = calcTempo(new Date().getTime() - new Date(entrada).getTime());
-            if (!confirm(`O veiculo ${nome} permaneceu por ${tempo}. Deseja encerrar?`))
-                return;
+            const licenciado = ler().filter((cliente) => cliente.placa == placa)
+                .find(element => element.usuario !== 'Cliente');
+            if (licenciado) {
+                alert('Acesso liberado!');
+            }
+            else {
+                const total = tabValue(parseInt(tempo));
+                if (total == 0) {
+                    if (!confirm(`O veiculo ${nome} permaneceu por ${tempo}. \n Saída Liberada!`))
+                        return;
+                }
+                else {
+                    if (!confirm(`O veiculo ${nome} permaneceu por ${tempo}. \n Total a pagar: R$ = 5,00!`))
+                        return;
+                }
+            }
             salvar(ler().filter((veiculo) => veiculo.placa !== placa));
             render();
         }
@@ -62,19 +82,21 @@
         return { ler, adicionar, remover, salvar, render };
     }
     patio().render();
-    (_a = $("#button-input")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-        var _a, _b, _c;
-        const nome = (_a = $("#nome")) === null || _a === void 0 ? void 0 : _a.value;
-        const placa = (_b = $("#placa")) === null || _b === void 0 ? void 0 : _b.value;
-        const check = (_c = $("#logista")) === null || _c === void 0 ? void 0 : _c.checked;
+    $("#button-input")?.addEventListener("click", () => {
+        const nome = $("#nome")?.value;
+        const placa = $("#placa")?.value;
+        const check = $("#logista")?.checked;
         let usuario = "Cliente";
+        const data = new Date();
+        const dataFormatada = data.toLocaleTimeString('pt-BR', { timeZone: 'UTC' });
+        console.log(dataFormatada);
         if (check)
             usuario = "Logísta";
         if (!nome || !placa) {
             alert("Os campos nome e placa são obrigatórios");
             return;
         }
-        patio().adicionar({ nome, placa, entrada: new Date().toISOString(), usuario }, true);
+        patio().adicionar({ nome, placa, entrada: dataFormatada, usuario }, true);
         clearInput();
     });
 })();

@@ -9,54 +9,59 @@
 </head>
 <body>
 
-    <div class="container">
-        <input 
-            type="text" 
-            name="nome" 
-            id="nome" 
-            placeholder="Modelo"
-            autocomplete="off"
-        />
-        
-        <input 
-            type="text" 
-            name="placa" 
-            id="placa" 
-            placeholder="Placa"
-            autocomplete="off"
-        />
-        <div class="logista">
+        <section id="formulario">
+            <div class="container">
+                <input 
+                    type="text" 
+                    name="nome" 
+                    id="nome" 
+                    placeholder="Modelo"
+                    autocomplete="off"
+                />
+                
+                <input 
+                    type="text" 
+                    name="placa" 
+                    id="placa" 
+                    placeholder="Placa"
+                    autocomplete="off"
+                />
+                <div class="logista">
 
-            <label>
-                <input class="largerCheckbox" type="checkbox" id="logista" checked="checked" value="1">
-                <span class="checkmark"></span>
-                Logísta
-            </label>
+                    <label>
+                        <input class="largerCheckbox" type="checkbox" id="logista" value="1">
+                        <span class="checkmark"></span>
+                        Logísta
+                    </label>
 
+                    
+                    <button id="button-input" >Cadastrar</button>
+                </div>
+                
+            </div>
+        </section>
+
+        <div id="#patio">
+            <h1>Pátio</h1>
+            <div class="grid stretch">
+                <table id="customers">
+                    <thead>
+                        <tr>
+                            <th>Modelo</th>
+                            <th class="center">Placa</th>
+                            <th>Entrada</th>
+                            <th>Usuário</th>
+                            <th class="center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patio">
             
-            <button id="button-input" >Cadastrar</button>
-        </div>
-        
-    </div>
-
-    <div>
-        <h1>Pátio</h1>
-        <section class="grid stretch">
-            <table id="customers">
-                <thead>
-                    <tr>
-                        <th>Modelo</th>
-                        <th class="center">Placa</th>
-                        <th>Entrada</th>
-                        <th>Usuário</th>
-                        <th class="center">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="patio">
-        
-                </tbody>
-            </table>
-            <script src="./script.js"></script>
+                    </tbody>
+                </table>
+                <script src="./script.js"></script>
+                            
+                
+            </div>
         </section>
 
     

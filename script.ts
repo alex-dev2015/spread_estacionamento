@@ -5,16 +5,26 @@ interface Veiculo {
     usuario : string;
 }
 
+
 (function() {
     const $ = (query: string): HTMLInputElement | null => 
             document.querySelector(query);
 
+      
     function calcTempo(mil: number){
         const min = Math.floor(mil / 60000);
         const sec = Math.floor((mil % 60000) / 1000);
 
         return `${min}m e ${sec}s`;
-    }  
+    } 
+    
+    function tabValue(tempo: number){
+        if (tempo <= 15) {
+            return 0;
+        }else{
+            return 1;
+        }
+    }
     
     function clearInput(){
         $("#nome").value = "";
@@ -26,6 +36,7 @@ interface Veiculo {
 
     function patio() {
         function ler():Veiculo[] {
+
             return localStorage.patio ? JSON.parse(localStorage.patio) : [];
         }
 
@@ -35,16 +46,14 @@ interface Veiculo {
         
         function adicionar(veiculo: Veiculo, salva?: boolean){
             const row = document.createElement("tr");
-
-                                    
-
+            
             row.innerHTML = `
                 <td>${veiculo.nome}</td>
                 <td class="center">${veiculo.placa}</td>
                 <td data-time="${veiculo.entrada}">
-                    ${veiculo.entrada.toLocaleString("pt-BR",{
-                        hour: "numeric",
-                        minute: "numeric",
+                    ${veiculo.entrada.toLocaleString("pt-BR", {
+                      hour: "numeric",
+                      minute: "numeric",
                     })}
                 </td>
                 <td>${veiculo.usuario}</td>
@@ -61,6 +70,7 @@ interface Veiculo {
 
             $("#patio")?.appendChild(row);
 
+         
            if(salva) salvar([...ler(), veiculo]);
 
         }
@@ -69,7 +79,22 @@ interface Veiculo {
 
             const tempo =  calcTempo(new Date().getTime() - new Date(entrada).getTime());
 
-            if (!confirm(`O veiculo ${nome} permaneceu por ${tempo}. Deseja encerrar?`)) return;
+            const licenciado = ler().filter((cliente) => cliente.placa == placa)
+                    .find(element => element.usuario !== 'Cliente');
+
+            if (licenciado) {
+                alert('Acesso liberado!');
+            }else{
+
+                const total = tabValue(parseInt(tempo));
+            
+                if(total == 0){
+                    if (!confirm(`O veiculo ${nome} permaneceu por ${tempo}. \n Saída Liberada!`)) return;
+                }else{
+                    if (!confirm(`O veiculo ${nome} permaneceu por ${tempo}. \n Total a pagar: R$ = 5,00!`)) return;
+                }
+                
+            }
 
             salvar(ler().filter((veiculo) => veiculo.placa !== placa));
             render();
@@ -95,6 +120,10 @@ interface Veiculo {
         const placa = $("#placa")?.value;
         const check = $("#logista")?.checked;
         let usuario = "Cliente";
+        const data = new Date();
+        const dataFormatada = data.toLocaleTimeString('pt-BR', {timeZone: 'UTC'});
+        
+        console.log(dataFormatada);
         
 
         if (check) usuario = "Logísta";
@@ -103,8 +132,10 @@ interface Veiculo {
             alert("Os campos nome e placa são obrigatórios");
             return;
         }
+            
+        
 
-        patio().adicionar({ nome, placa, entrada: new Date().toISOString(), usuario }, true);
+        patio().adicionar({ nome, placa, entrada: dataFormatada, usuario }, true);
         clearInput();
     });
 })();
