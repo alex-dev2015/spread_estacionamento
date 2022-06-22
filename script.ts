@@ -14,7 +14,15 @@ interface Veiculo {
         const sec = Math.floor((mil % 60000) / 1000);
 
         return `${min}m e ${sec}s`;
-    }            
+    }  
+    
+    function clearInput(){
+        $("#nome").value = "";
+        $("#placa").value = "";
+        $("#logista").checked = false;
+
+    }
+    
 
     function patio() {
         function ler():Veiculo[] {
@@ -32,7 +40,7 @@ interface Veiculo {
 
             row.innerHTML = `
                 <td>${veiculo.nome}</td>
-                <td>${veiculo.placa}</td>
+                <td class="center">${veiculo.placa}</td>
                 <td data-time="${veiculo.entrada}">
                     ${veiculo.entrada.toLocaleString("pt-BR",{
                         hour: "numeric",
@@ -40,14 +48,14 @@ interface Veiculo {
                     })}
                 </td>
                 <td>${veiculo.usuario}</td>
-                <td>
-                    <button class="delete" 
-                            data-placa="${veiculo.placa}">x
+                <td class="center">
+                    <button class="button-delete" 
+                            data-placa="${veiculo.placa}">delete
                     </button>
                 </td>
             `;
 
-            row.querySelector(".delete")?.addEventListener("click", function (){
+            row.querySelector(".button-delete")?.addEventListener("click", function (){
                 remover(this.dataset.placa)
             });
 
@@ -82,7 +90,7 @@ interface Veiculo {
     
     patio().render();
 
-    $("#cadastrar")?.addEventListener("click", () => {
+    $("#button-input")?.addEventListener("click", () => {
         const nome = $("#nome")?.value;
         const placa = $("#placa")?.value;
         const check = $("#logista")?.checked;
@@ -97,5 +105,6 @@ interface Veiculo {
         }
 
         patio().adicionar({ nome, placa, entrada: new Date().toISOString(), usuario }, true);
+        clearInput();
     });
 })();

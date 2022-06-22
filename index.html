@@ -25,9 +25,18 @@
             placeholder="Placa"
             autocomplete="off"
         />
-        <input type="checkbox" name="logista" id="logista" value="1">
-        <label for="logista"> Logísta</label>
-        <button id="cadastrar" >Cadastrar</button>
+        <div class="logista">
+
+            <label>
+                <input class="largerCheckbox" type="checkbox" id="logista" checked="checked" value="1">
+                <span class="checkmark"></span>
+                Logísta
+            </label>
+
+            
+            <button id="button-input" >Cadastrar</button>
+        </div>
+        
     </div>
 
     <div>
@@ -37,10 +46,10 @@
                 <thead>
                     <tr>
                         <th>Modelo</th>
-                        <th>Placa</th>
+                        <th class="center">Placa</th>
                         <th>Entrada</th>
                         <th>Usuário</th>
-                        <th>Ações</th>
+                        <th class="center">Ações</th>
                     </tr>
                 </thead>
                 <tbody id="patio">

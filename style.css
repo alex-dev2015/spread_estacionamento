@@ -13,12 +13,19 @@ body{
 	justify-items: stretch;
 }
 
+.center{
+    text-align: center;
+}
+
 label{
     color: #fff;
+    
 }
 
 .container{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     padding: 10px;
     margin: 10px;   
@@ -36,15 +43,26 @@ label{
 }
 
 input[type=text]{
-    width: 140px;
+    width: 200px;
     height: 26px;
     margin: 10px;
     padding: 15px 32px;
     font-size: 16px;
 }
 
+.logista{
+    width: 200px;
+    align-items: center;
+}
 
-button{
+
+
+input.largerCheckbox{
+    transform: scale(2);
+}
+
+
+#button-input{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -55,6 +73,14 @@ button{
     font-size: 16px;
 }
 
+.button-delete{
+  background-color: #f44336; 
+  color: #fff; 
+  border: 0;
+  
+  text-align: center;
+  justify-content: center;
+}
 
 /* Grid Item */
 .item {
@@ -88,7 +114,7 @@ button{
 
 h1 {
 	text-align: center;
-	font-size: 1.25em;
+	font-size: 1.60em;
 	font-weight: normal;
     color: #fff;
     font-family: 'Ubuntu';
@@ -119,10 +145,14 @@ table {
     width: 100%;
     background-color: #ccc;
   }
+
+  
   
   th, td {
     text-align: left;
     padding: 8px;
+    font-size: 14px;
+    
   }
   
   tr:nth-child(even){background-color: #f2f2f2}
@@ -130,4 +160,5 @@ table {
   th {
     background-color: #04AA6D;
     color: white;
+    font-size: 18px;
   }

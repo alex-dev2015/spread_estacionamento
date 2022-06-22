@@ -6,6 +6,11 @@
         const sec = Math.floor((mil % 60000) / 1000);
         return `${min}m e ${sec}s`;
     }
+    function clearInput() {
+        $("#nome").value = "";
+        $("#placa").value = "";
+        $("#logista").checked = false;
+    }
     function patio() {
         function ler() {
             return localStorage.patio ? JSON.parse(localStorage.patio) : [];
@@ -18,7 +23,7 @@
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${veiculo.nome}</td>
-                <td>${veiculo.placa}</td>
+                <td class="center">${veiculo.placa}</td>
                 <td data-time="${veiculo.entrada}">
                     ${veiculo.entrada.toLocaleString("pt-BR", {
                 hour: "numeric",
@@ -26,13 +31,13 @@
             })}
                 </td>
                 <td>${veiculo.usuario}</td>
-                <td>
-                    <button class="delete" 
-                            data-placa="${veiculo.placa}">x
+                <td class="center">
+                    <button class="button-delete" 
+                            data-placa="${veiculo.placa}">delete
                     </button>
                 </td>
             `;
-            (_a = row.querySelector(".delete")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () {
+            (_a = row.querySelector(".button-delete")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () {
                 remover(this.dataset.placa);
             });
             (_b = $("#patio")) === null || _b === void 0 ? void 0 : _b.appendChild(row);
@@ -57,7 +62,7 @@
         return { ler, adicionar, remover, salvar, render };
     }
     patio().render();
-    (_a = $("#cadastrar")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+    (_a = $("#button-input")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         var _a, _b, _c;
         const nome = (_a = $("#nome")) === null || _a === void 0 ? void 0 : _a.value;
         const placa = (_b = $("#placa")) === null || _b === void 0 ? void 0 : _b.value;
@@ -70,5 +75,6 @@
             return;
         }
         patio().adicionar({ nome, placa, entrada: new Date().toISOString(), usuario }, true);
+        clearInput();
     });
 })();
