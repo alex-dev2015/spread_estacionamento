@@ -11,7 +11,7 @@ body{
 header{
     height: 50px;
     display: flex;
-    flex-direction: column  ;
+    flex-direction: column;
 }
 
 header h1{
@@ -199,4 +199,18 @@ table {
     background-color: #04AA6D;
     color: white;
     font-size: 18px;
+  }
+
+
+  @media (max-width: 720px) {
+    .linha{
+        display: flex;
+        flex-flow: column row ;
+    }
+    .coluna-50 {
+        width: 100%;
+        
+    }
+
+    
   }
