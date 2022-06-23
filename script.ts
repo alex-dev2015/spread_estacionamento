@@ -120,11 +120,7 @@ interface Veiculo {
         const placa = $("#placa")?.value;
         const check = $("#logista")?.checked;
         let usuario = "Cliente";
-        const data = new Date();
-        const dataFormatada = data.toLocaleTimeString('pt-BR', {timeZone: 'UTC'});
-        
-        console.log(dataFormatada);
-        
+       
 
         if (check) usuario = "Logísta";
         
@@ -135,7 +131,7 @@ interface Veiculo {
             
         
 
-        patio().adicionar({ nome, placa, entrada: dataFormatada, usuario }, true);
+        patio().adicionar({ nome, placa, entrada: new Date().toISOString(), usuario }, true);
         clearInput();
     });
 })();

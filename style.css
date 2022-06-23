@@ -1,5 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;500;700&display=swap');
+
+*{
+    margin: 0;
+}
+
 body{
     background-color: #122120;
+}
+
+header{
+    height: 150px;
+    display: flex;
+    flex-direction: column  ;
+}
+
+header h1{
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;    
 }
 
 /* Grid */
@@ -22,12 +41,13 @@ label{
     
 }
 
-#formulario{
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10%;
-
+.linha{
+    display: flex;
+    flex-flow: row wrap;
+}
+.coluna-50 {
+    width: 50%;
+    
 }
 
 
@@ -37,23 +57,24 @@ label{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    margin: 10px;   
-    
+    padding: 0px;
+    margin: 20px;   
+   
 }
 
 .container > div {
     /* background-color: #f1f1f1; */
     width: 600px;
-    margin: 10px;
     
+    padding: 10px;
     text-align: center;
     line-height: 75px;
-    font-size: 24px
+    font-size: 24px;
+    
 }
 
 input[type=text]{
-    width: 200px;
+    width: 40%;
     height: 24px;
     margin: 10px;
     padding: 15px 32px;
@@ -63,6 +84,7 @@ input[type=text]{
 .logista{
     width: 200px;
     align-items: center;
+    
 }
 
 
@@ -81,6 +103,11 @@ input.largerCheckbox{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+}
+
+
+.container-patio{
+    margin-top: 20px;
 }
 
 .button-delete{
@@ -122,8 +149,9 @@ input.largerCheckbox{
     padding: 20px;
 }
 
-h1 {
-	text-align: center;
+ h1 {
+	margin-bottom: 20px;
+    text-align: center;
 	font-size: 1.60em;
 	font-weight: normal;
     color: #fff;
