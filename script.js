@@ -16,7 +16,7 @@
     function clearInput() {
         $("#nome").value = "";
         $("#placa").value = "";
-        $("#logista").checked = false;
+        $("#lojista").checked = false;
     }
     function patio() {
         function ler() {
@@ -85,10 +85,10 @@
     $("#button-input")?.addEventListener("click", () => {
         const nome = $("#nome")?.value;
         const placa = $("#placa")?.value;
-        const check = $("#logista")?.checked;
+        const check = $("#lojista")?.checked;
         let usuario = "Cliente";
         if (check)
-            usuario = "Logísta";
+            usuario = "Lojista";
         if (!nome || !placa) {
             alert("Os campos nome e placa são obrigatórios");
             return;

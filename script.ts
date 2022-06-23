@@ -29,7 +29,7 @@ interface Veiculo {
     function clearInput(){
         $("#nome").value = "";
         $("#placa").value = "";
-        $("#logista").checked = false;
+        $("#lojista").checked = false;
 
     }
     
@@ -118,11 +118,11 @@ interface Veiculo {
     $("#button-input")?.addEventListener("click", () => {
         const nome = $("#nome")?.value;
         const placa = $("#placa")?.value;
-        const check = $("#logista")?.checked;
+        const check = $("#lojista")?.checked;
         let usuario = "Cliente";
        
 
-        if (check) usuario = "Logísta";
+        if (check) usuario = "Lojista";
         
         if (!nome || !placa) {
             alert("Os campos nome e placa são obrigatórios");
