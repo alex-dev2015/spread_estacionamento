@@ -203,6 +203,17 @@ table {
 
 
   @media (max-width: 720px) {
+
+    body{
+        width: 100vw;
+    }
+
+    header{
+        margin: 0;
+        padding: 0;
+        
+    }
+
     .linha{
         display: flex;
         flex-flow: column row ;
@@ -212,5 +223,32 @@ table {
         
     }
 
+    .container > div {
+        width: 100vw;
+    }
+    
+
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #ccc;
+      }
+    
+      
+      th, td {
+        text-align: left;
+        padding: 5px;
+        font-size: 10px;
+        
+      }
+      
+      tr:nth-child(even){background-color: #f2f2f2}
+      
+      th {
+        background-color: #04AA6D;
+        color: white;
+        font-size: 12px;
+      }
     
   }
