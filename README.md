@@ -52,7 +52,7 @@ Sobre o seu projeto
 
 :heavy_check_mark: Inclusão de carros no estacionamento;\
 :heavy_check_mark: Acesso liberado para Lojistas;\
-:heavy_check_mark: Cobrança de pagamento para clientes que passarem de 15 minutos no pátios;
+:heavy_check_mark: Cobrança de pagamento para clientes que passarem de 15 minutos no pátio;
 
 ## :rocket: Tecnologias ##
 
